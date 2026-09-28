@@ -75,6 +75,7 @@ function App() {
               <button
                 type="button"
                 className="delete-button"
+                aria-label={`Delete task: ${item.text}`}
                 onClick={() => deleteTask(item.id)}
               >
                 Delete
