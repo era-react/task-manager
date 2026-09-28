@@ -41,7 +41,11 @@ function App() {
       <h1>Task Manager</h1>
 
       <form onSubmit={addTask} className="task-form">
+        <label htmlFor="task-input" className="visually-hidden">
+          New task
+        </label>
         <input
+          id="task-input"
           type="text"
           placeholder="Enter a task"
           value={task}
@@ -57,19 +61,24 @@ function App() {
         <ul className="task-list">
           {tasks.map((item) => (
             <li key={item.id} className="task-item">
-              <span className={item.completed ? 'completed' : ''}>
-                {item.text}
-              </span>
+              <label className="task-label">
+                <input
+                  type="checkbox"
+                  checked={item.completed}
+                  onChange={() => toggleTask(item.id)}
+                />
+                <span className={item.completed ? 'completed' : ''}>
+                  {item.text}
+                </span>
+              </label>
 
-              <div>
-                <button onClick={() => toggleTask(item.id)}>
-                  {item.completed ? 'Undo' : 'Complete'}
-                </button>
-
-                <button onClick={() => deleteTask(item.id)}>
-                  Delete
-                </button>
-              </div>
+              <button
+                type="button"
+                className="delete-button"
+                onClick={() => deleteTask(item.id)}
+              >
+                Delete
+              </button>
             </li>
           ))}
         </ul>
